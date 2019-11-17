@@ -6,14 +6,14 @@ plugins {
 }
 
 group 'com.bom.example'
-version 'Blackfriars.2.RELEASE'
+version bomVersion
 
 sourceCompatibility = 1.8
 
 
 def versions = [
-        liba: '1.0.1',
-        libb: '1.0.2',
+        liba: libaVersion,
+        libb: libbVersion,
 ]
 
 

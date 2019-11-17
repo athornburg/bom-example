@@ -1,22 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE"
-    }
-}
-
-apply plugin: "io.spring.dependency-management"
-
-dependencyManagement {
-    imports {
-        mavenBom "com.bom.example:bom-example:Blackfriars.1.RELEASE"
-    }
-}
-
 dependencies {
-    compile('bom-example:lib-a')
-    compile('bom-example:lib-b')
+    implementation(enforcedPlatform("com.bom.example:bom-example:" + bomVersion))
+    implementation('com.bom.example:lib-a')
+    implementation('com.bom.example:lib-b')
 }
 
