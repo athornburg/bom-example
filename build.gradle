@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+}
+
+group 'com.bom.example'
+version 'Blackfriars.1.RELEASE'
+
+sourceCompatibility = 1.8
+
+
+def versions = [
+        liba: '1.0.1',
+        libb: '1.0.2',
+]
+
+
+dependencyManagement {
+    dependencies {
+        dependency group: 'bom-example', name: 'lib-a', version: versions.liba
+        dependency group: 'bom-example', name: 'lib-b', version: versions.libb
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url "http://localhost:8081/artifactory/libs-release"
+            credentials {
+                username "admin"
+                password "password"
+
+            }
+        }
+    }
+    publications {
+        mavenBom(MavenPublication) {
+            artifacts = []
+            pom.withXml {
+                def propertiesNode = new Node(null, "properties")
+                versions.each { entry -> propertiesNode.appendNode(entry.key, entry.value) }
+                asNode().append(propertiesNode)
+            }
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://localhost:8081/artifactory/libs-release"
+            credentials {
+                username "admin"
+                password "password"
+            }
+        }
+    }
+
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
+    }
+}

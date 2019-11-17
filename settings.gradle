@@ -1,0 +1,5 @@
+rootProject.name = 'bom-example'
+include 'lib-a'
+include 'lib-b'
+include 'consumer'
+

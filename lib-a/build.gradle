@@ -1,0 +1,20 @@
+version = '1.0.1'
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("build/libs/lib-a-$version" + ".jar") {
+                extension 'jar'
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "http://localhost:8081/artifactory/libs-release"
+            credentials {
+                username "admin"
+                password "password"
+
+            }
+        }
+    }
+}

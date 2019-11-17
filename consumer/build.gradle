@@ -1,0 +1,6 @@
+dependencies {
+    implementation(enforcedPlatform("com.bom.example:bom-example:Blackfriars.1.RELEASE"))
+    compile('bom-example:lib-a')
+    compile('bom-example:lib-b')
+}
+
