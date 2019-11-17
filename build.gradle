@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.bom.example'
-version 'Blackfriars.1.RELEASE'
+version 'Blackfriars.2.RELEASE'
 
 sourceCompatibility = 1.8
 
@@ -19,8 +19,8 @@ def versions = [
 
 dependencyManagement {
     dependencies {
-        dependency group: 'bom-example', name: 'lib-a', version: versions.liba
-        dependency group: 'bom-example', name: 'lib-b', version: versions.libb
+        dependency group: 'com.bom.example', name: 'lib-a', version: versions.liba
+        dependency group: 'com.bom.example', name: 'lib-b', version: versions.libb
     }
 }
 
@@ -50,6 +50,7 @@ publishing {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
+    group 'com.bom.example'
 
     repositories {
         mavenCentral()
